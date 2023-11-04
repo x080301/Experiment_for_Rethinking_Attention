@@ -5,6 +5,7 @@ import os
 from distutils.sysconfig import get_config_vars
 
 (opt,) = get_config_vars('OPT')
+print(opt)
 os.environ['OPT'] = " ".join(
     flag for flag in opt.split() if flag != '-Wstrict-prototypes'
 )

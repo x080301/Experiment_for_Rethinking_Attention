@@ -11,8 +11,8 @@
 
 [ ! -d "slurm_logs" ] && echo "Create a directory slurm_logs" && mkdir -p slurm_logs
 
-module load cuda/11.1.1
-module load gcc
+#module load cuda/11.7
+#module load gcc
 
 echo "===> Anaconda env loaded"
 source activate openpoints
@@ -28,7 +28,7 @@ done
 echo $PORT
 
 nvidia-smi
-nvcc --version
+#nvcc --version
 
 hostname
 NUM_GPU_AVAILABLE=`nvidia-smi --query-gpu=name --format=csv,noheader | wc -l`
@@ -37,8 +37,10 @@ echo $NUM_GPU_AVAILABLE
 
 cfg=$1
 PY_ARGS=${@:2}
-python examples/segmentation/main.py --cfg $cfg ${PY_ARGS}
 
+echo ${PY_ARGS}
+echo $cfg
+python examples/segmentation/main.py --cfg $cfg ${PY_ARGS}
 
 # how to run
 # using slurm, run with 1 GPU, by 3 times (array=0-2):
